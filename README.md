@@ -26,7 +26,7 @@ An AI-powered web application that helps users create professional ATS-friendly 
 ## How to Run Locally
 
 ```bash
-git clone https://github.com/Abhijith-AjayKumar/AI-Resume-Portfolio-Builder.git
+git clone https://github.com/harika-padam/AI-Resume-Portfolio-Builder.git
 cd AI-Resume-Portfolio-Builder
 python -m venv venv
 venv\Scripts\activate
