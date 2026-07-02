@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AI Portfolio Generator</title>
+<style>
+body{font-family:Arial;background:#f4f6f9;margin:0}
+header{background:#1f2d3d;color:white;padding:15px 30px;display:flex;justify-content:space-between}
+header a{color:white;text-decoration:none;font-weight:bold}
+.container{max-width:800px;margin:30px auto;background:white;padding:25px;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,0.1)}
+input,textarea{width:100%;padding:10px;margin:10px 0;border-radius:5px;border:1px solid #ccc}
+button{background:#4CAF50;color:white;padding:12px;border:none;border-radius:5px;width:100%;font-size:16px}
+.preview{margin-top:25px;border-top:2px solid #ddd;padding-top:15px}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h3>AI Portfolio Website</h3>
+    <a href="/resume">Back to Resume</a>
+</header>
+
+<div class="container">
+<h2>Create Your Portfolio</h2>
+
+<form method="POST" action="/portfolio">
+    <input type="text" name="name" placeholder="Your Name">
+    <input type="text" name="title" placeholder="Your Title (Web Developer, AI Engineer)">
+    <textarea name="about" placeholder="About You"></textarea>
+    <input type="text" name="skills" placeholder="Skills (comma separated)">
+    <textarea name="projects" placeholder="Projects Description"></textarea>
+    <input type="text" name="contact" placeholder="Email | GitHub | LinkedIn">
+    <button type="submit">Generate AI Portfolio</button>
+</form>
+
+{% if data %}
+<div class="preview">
+    <h2>{{ data.name }}</h2>
+    <h4>{{ data.title }}</h4>
+    <p><b>About:</b> {{ data.about }}</p>
+    <p><b>Skills:</b> {{ data.skills }}</p>
+    <p><b>Projects:</b> {{ data.projects }}</p>
+    <p><b>Contact:</b> {{ data.contact }}</p>
+</div>
+{% endif %}
+
+</div>
+</body>
+</html>

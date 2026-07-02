@@ -1,0 +1,10 @@
+{
+  "name": "Abhijith",
+  "education": "BSc Computer Science, Pursuing MCA at CUSAT",
+  "skills": ["Python", "C#", "ASP.NET Core", "SQL", "Angular"],
+  "projects": [
+    "Fingerprint Attendance System",
+    "Smart Expense & Work Tracker"
+  ],
+  "career_goal": "Software Developer"
+}

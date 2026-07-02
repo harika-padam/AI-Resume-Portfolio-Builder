@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Resume Builder</title>
+    <style>
+        body{font-family:Arial;background:#f4f6f9;margin:0;padding:0}
+        header{background:#1f2d3d;color:#fff;padding:15px 30px;display:flex;justify-content:space-between}
+        header a{color:#fff;text-decoration:none;font-weight:bold;margin-left:15px}
+        .container{max-width:1200px;margin:20px auto;display:grid;grid-template-columns:1fr 1fr;gap:20px}
+        .card{background:#fff;padding:20px;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,0.1)}
+        input,select,textarea{width:100%;padding:10px;margin:8px 0;border-radius:5px;border:1px solid #ccc}
+        button{padding:12px;border:none;border-radius:5px;color:white;cursor:pointer;font-size:15px}
+        .btn-generate{background:#4CAF50;width:100%}
+        .btn-pdf{background:#2196F3;width:100%;margin-top:10px}
+        .btn-docx{background:#9C27B0;width:100%;margin-top:10px}
+        .btn-portfolio{background:#FF9800;width:100%;margin-top:10px}
+        .resume-preview{border:1px solid #ddd;padding:15px;border-radius:5px}
+        img{max-width:120px;border-radius:50%;margin-bottom:10px}
+        @media(max-width:900px){
+            .container{grid-template-columns:1fr}
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h3>AI Resume Builder</h3>
+    <div>
+        <a href="/resume">Resume</a>
+        <a href="/portfolio">Portfolio</a>
+    </div>
+</header>
+
+<div class="container">
+
+    <!-- FORM -->
+    <div class="card">
+        <h2>Build Your Resume</h2>
+        <form method="POST" action="/resume" enctype="multipart/form-data">
+
+            <label>Template</label>
+            <select name="template">
+                <option value="minimal">Minimal (ATS)</option>
+                <option value="modern">Modern</option>
+                <option value="corporate">Corporate</option>
+            </select>
+
+            <label>Profile Photo</label>
+            <input type="file" name="photo">
+
+            <label>Profession</label>
+            <input type="text" name="profession" placeholder="Software Developer" required>
+
+            <label>Name</label>
+            <input type="text" name="name" required>
+
+            <label>Skills (comma separated)</label>
+            <input type="text" name="skills" required>
+
+            <label>Career Goal</label>
+            <input type="text" name="career" required>
+
+            <button type="submit" class="btn-generate">Generate Resume</button>
+        </form>
+
+        {% if summary %}
+        <!-- PDF -->
+        <form method="POST" action="/download/pdf">
+            <button type="submit" class="btn-pdf">Download PDF</button>
+        </form>
+
+        <!-- DOCX -->
+        <form method="POST" action="/download/docx">
+            <button type="submit" class="btn-docx">Download Word (DOCX)</button>
+        </form>
+        {% endif %}
+
+        <a href="/portfolio">
+            <button type="button" class="btn-portfolio">Go to Portfolio Generator</button>
+        </a>
+    </div>
+
+    <!-- PREVIEW -->
+    <div class="card">
+        <h2>Resume Preview</h2>
+        {% if student %}
+        <div class="resume-preview">
+
+            {% if photo and template != "minimal" %}
+            <img src="{{ photo }}">
+            {% endif %}
+
+            <h3>{{ student.name }}</h3>
+            <strong>{{ student.profession }}</strong>
+            <p><b>Career Goal:</b> {{ student.career }}</p>
+            <p><b>Skills:</b> {{ student.skills | join(", ") }}</p>
+
+            <h4>Professional Summary</h4>
+            <p>{{ summary }}</p>
+        </div>
+        {% else %}
+        <p>No resume generated yet.</p>
+        {% endif %}
+    </div>
+
+</div>
+
+</body>
+</html>
